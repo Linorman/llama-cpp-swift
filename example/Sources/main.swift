@@ -1,15 +1,13 @@
 import Foundation
 import LLamaSwift
 
-guard let modelPath = ProcessInfo.processInfo.environment["MODEL_PATH"] else {
-    print("Error: MODEL_PATH environment variable not set.")
-    exit(1)
-}
+//let modelPath = "/Volumes/Macintosh HD/Users/huozhiyu/Desktop/intelli_mailer/assets/models/inline_prediction.gguf"
+let modelPath = "/Users/huozhiyu/Downloads/Llama-Chat-Summary-3.2-3B.Q4_K_M.gguf"
 
 let model = try Model(modelPath: modelPath)
 let llama = LLama(model: model)
-let prompt = "what is the meaning of life?"
+let prompt = "Hello what's your name?"
 
-for try await token in await llama.infer(prompt: prompt, maxTokens: 1024) {
+for try await token in await llama.infer(prompt: prompt) {
     print(token, terminator: "")
 }
